@@ -1,8 +1,8 @@
 #include "servo.h"
 
 /*
- * Default calibration for my build. center_us values came from the
- * horn alignment step in docs/calibration.md, re-check after any rebuild.
+ * Default calibration table. The center_us numbers are example trims,
+ * every build needs its own - follow docs/calibration.md and update these.
  * Ankle max is 60 because the "lift back foot" key needs about 51 deg.
  */
 servo_cal_t g_servo_cal[NUM_SERVOS] = {
@@ -36,9 +36,11 @@ uint16_t servo_angle_to_us(const servo_cal_t *c, float deg)
 
 uint16_t servo_us_to_ticks(uint16_t us, uint32_t osc_hz)
 {
-    /* prescale is computed for 50 Hz from the nominal 25 MHz clock, so the
-     * real period is a bit shorter when the oscillator runs fast */
-    const uint32_t prescale = 121;   /* round(25e6 / (4096 * 50)) - 1 */
+    /* Same prescale math as Adafruit_PWMServoDriver::setPWMFreq(50), so
+     * this has to be given the same osc_hz as setOscillatorFrequency().
+     * The prescale is an integer, so the real frame is not exactly 20 ms
+     * and the tick length has to come from the prescale, not from 20ms/4096. */
+    uint32_t prescale = (uint32_t)((float)osc_hz / (4096.0f * 50.0f) - 0.5f);
     uint32_t tick_ns = (uint32_t)(1000000000ull * (prescale + 1) / osc_hz);
     return (uint16_t)(((uint32_t)us * 1000u + tick_ns / 2) / tick_ns);
 }

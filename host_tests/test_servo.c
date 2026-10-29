@@ -29,8 +29,9 @@ static void test_ticks(void)
 {
     /* nominal clock: 122 * 40 ns = 4.88 us per tick */
     CHECK(servo_us_to_ticks(1500, 25000000u) == 307);
-    /* fast oscillator -> shorter tick -> more ticks for the same pulse */
-    CHECK(servo_us_to_ticks(1500, 26100000u) == 321);
+    /* 26.1 MHz: prescale 126, 4.866 us per tick */
+    CHECK(servo_us_to_ticks(1500, 26100000u) == 308);
+    CHECK(servo_us_to_ticks(500, 26100000u) == 103);
 }
 
 static void test_default_table(void)

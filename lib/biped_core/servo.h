@@ -32,7 +32,8 @@ typedef struct {
 extern servo_cal_t g_servo_cal[NUM_SERVOS];
 
 uint16_t servo_angle_to_us(const servo_cal_t *c, float deg);
-/* osc_hz is the real PCA9685 oscillator, mine measured ~26.1 MHz not 25 */
+/* osc_hz is the real PCA9685 oscillator frequency. It is usually off
+ * from the nominal 25 MHz by a few percent, see docs/calibration.md */
 uint16_t servo_us_to_ticks(uint16_t us, uint32_t osc_hz);
 const char *servo_name(int idx);
 

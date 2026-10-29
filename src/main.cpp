@@ -10,7 +10,7 @@
 #include "servo.h"
 
 #define PCA_ADDR      0x40
-#define PCA_OSC_HZ    26100000UL   // measured with a scope, see calibration.md
+#define PCA_OSC_HZ    26100000UL   // internal osc is rarely exactly 25 MHz, see calibration.md
 #define UPDATE_MS     20           // one servo frame
 
 Adafruit_PWMServoDriver pca(PCA_ADDR);
