@@ -184,7 +184,10 @@ t_ms,lx,lz,rx,rz,roll,L_HIP,L_KNEE,L_ANKLE,L_ROLL,R_HIP,R_KNEE,R_ANKLE,R_ROLL
   `servo.c` by hand.
 - After `j` commands, `walk` starts from the gait's idea of where the feet
   are, not where you moved them, so the first move can jump.
-- The gait table is in RAM on the AVR (that is most of the 54% RAM use).
+- The gait tables are in RAM on the AVR (about 260 bytes of the 1123 used).
+- I have not timed one 20 ms frame on the Nano (two IK solves in float
+  plus 8 I2C writes). That should be checked with `micros()` before adding
+  anything else to the loop.
 - Only the C logic is tested. Servo behaviour, power and balance need the
   real robot.
 
@@ -197,8 +200,8 @@ t_ms,lx,lz,rx,rz,roll,L_HIP,L_KNEE,L_ANKLE,L_ROLL,R_HIP,R_KNEE,R_ANKLE,R_ROLL
   and height at runtime.
 - Use servos with position feedback, or at least read the current draw per
   leg, to detect when a foot actually touches down.
-- Use an ESP32 instead of the Nano. Floating point IK for two legs every
-  20 ms is fine on the Nano, but there is not much headroom left.
+- Use an ESP32 instead of the Nano for more RAM, hardware float and room
+  for an IMU filter.
 
 ## License
 
