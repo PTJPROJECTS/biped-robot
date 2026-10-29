@@ -3,16 +3,17 @@
 /*
  * Default calibration for my build. center_us values came from the
  * horn alignment step in docs/calibration.md, re-check after any rebuild.
+ * Ankle max is 60 because the "lift back foot" key needs about 51 deg.
  */
 servo_cal_t g_servo_cal[NUM_SERVOS] = {
     /* center  dir  min  max */
     { 1500,  1, -45,  60 },   /* L_HIP   */
     { 1470,  1,   0, 100 },   /* L_KNEE  */
-    { 1530,  1, -50,  50 },   /* L_ANKLE */
+    { 1530,  1, -50,  60 },   /* L_ANKLE */
     { 1500,  1, -20,  20 },   /* L_ROLL  */
     { 1520, -1, -45,  60 },   /* R_HIP   */
     { 1500, -1,   0, 100 },   /* R_KNEE  */
-    { 1480, -1, -50,  50 },   /* R_ANKLE */
+    { 1480, -1, -50,  60 },   /* R_ANKLE */
     { 1510,  1, -20,  20 },   /* R_ROLL  */
 };
 
