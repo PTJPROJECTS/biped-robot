@@ -6,8 +6,7 @@ millimetres and turned into joint angles with 2-link inverse kinematics, and
 the motion between key poses is eased so the servos don't jerk. You control
 it with short text commands over USB serial.
 
-This is a rebuilt and cleaned up version of my B.Tech project at Anurag
-Group of Institutions (now Anurag University). The original gait was a table
+This is a rebuilt and cleaned up version of my B.Tech project at Institutions. The original gait was a table
 of hand-tuned servo angles. Here the gait is written as foot positions and
 IK does the rest, which made it much easier to change step length and
 height. The IK, gait player, servo mapping and command parser are plain C
